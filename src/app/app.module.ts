@@ -1,3 +1,5 @@
+import { ErrorPageComponent } from './error-page/error-page.component';
+import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -20,12 +22,14 @@ import { ServersService } from './servers/servers.service';
     ServersComponent,
     UserComponent,
     EditServerComponent,
-    ServerComponent
+    ServerComponent,
+    ErrorPageComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    AppRoutingModule
   ],
   providers: [ServersService],
   bootstrap: [AppComponent]
