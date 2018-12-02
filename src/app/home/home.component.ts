@@ -1,3 +1,4 @@
+import { AuthService } from './../auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -8,12 +9,22 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  isLoggedIn: boolean;
+  constructor(private router: Router, private authservice: AuthService) { }
 
   ngOnInit() {
+    this.isLoggedIn = this.authservice.loggedIn;
   }
 
   navigateToServers = () => {
     this.router.navigate(['servers']);
+  }
+
+  login = () => {
+    this.authservice.login();
+  }
+
+  logout = () => {
+    this.authservice.logout();
   }
 }

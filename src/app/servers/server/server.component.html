@@ -1,2 +1,6 @@
 <h5>{{ server.name }}</h5>
 <p>Server status is {{ server.status }}</p>
+<a [routerLink]="['/servers/' + 1]">
+  Go to prod server
+</a>
+<button class="btn btn-primary" (click)="navigateToEdit()">Edit</button>
