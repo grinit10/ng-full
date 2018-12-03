@@ -1,31 +1,39 @@
-import { Component } from '@angular/core';
+import { Server } from './server';
+import { Component, OnInit } from '@angular/core';
+import { ServersService } from './servers.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+  // servers: Server[] = [];
   servers = [
-    {
-      name: 'Testserver',
-      capacity: 10,
-      id: this.generateId()
-    },
-    {
-      name: 'Liveserver',
-      capacity: 100,
-      id: this.generateId()
-    }
+    // new Server('Test Server', 10),
+    // new Server('Lufe Server', 100)
   ];
+  constructor(private serversService: ServersService) {}
+
+  ngOnInit() {
+    this.serversService.getServers().subscribe(
+      rspns => {
+        const keys: any[] = Object.keys(rspns);
+        keys.forEach(key => {
+          this.servers.push(rspns[key]);
+        });
+      },
+      err => alert(err.message),
+      () => console.log(this.servers)
+    );
+  }
+
   onAddServer(name: string) {
-    this.servers.push({
-      name: name,
-      capacity: 50,
-      id: this.generateId()
-    });
+    this.serversService.saveServer(new Server(name, 50)).subscribe(
+      msg => console.log(msg),
+      err => console.log(err),
+      () => console.log('Server save completed')
+    );
   }
-  private generateId() {
-    return Math.round(Math.random() * 10000);
-  }
+
 }
