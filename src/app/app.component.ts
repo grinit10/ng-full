@@ -1,39 +1,42 @@
-import { Server } from './server';
-import { Component, OnInit } from '@angular/core';
-import { ServersService } from './servers.service';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
-  // servers: Server[] = [];
+export class AppComponent {
   servers = [
-    // new Server('Test Server', 10),
-    // new Server('Lufe Server', 100)
+    {
+      instanceType: 'medium',
+      name: 'Production Server',
+      status: 'stable',
+      started: new Date(15, 1, 2017)
+    },
+    {
+      instanceType: 'large',
+      name: 'User Database',
+      status: 'stable',
+      started: new Date(15, 1, 2017)
+    },
+    {
+      instanceType: 'small',
+      name: 'Development Server',
+      status: 'offline',
+      started: new Date(15, 1, 2017)
+    },
+    {
+      instanceType: 'small',
+      name: 'Testing Environment Server',
+      status: 'stable',
+      started: new Date(15, 1, 2017)
+    }
   ];
-  constructor(private serversService: ServersService) {}
-
-  ngOnInit() {
-    this.serversService.getServers().subscribe(
-      rspns => {
-        const keys: any[] = Object.keys(rspns);
-        keys.forEach(key => {
-          this.servers.push(rspns[key]);
-        });
-      },
-      err => alert(err.message),
-      () => console.log(this.servers)
-    );
+  getStatusClasses(server: {instanceType: string, name: string, status: string, started: Date}) {
+    return {
+      'list-group-item-success': server.status === 'stable',
+      'list-group-item-warning': server.status === 'offline',
+      'list-group-item-danger': server.status === 'critical'
+    };
   }
-
-  onAddServer(name: string) {
-    this.serversService.saveServer(new Server(name, 50)).subscribe(
-      msg => console.log(msg),
-      err => console.log(err),
-      () => console.log('Server save completed')
-    );
-  }
-
 }
