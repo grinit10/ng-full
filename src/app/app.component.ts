@@ -17,12 +17,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.serversService.getServers().subscribe(
-      rspns => {
-        const keys: any[] = Object.keys(rspns);
-        keys.forEach(key => {
-          this.servers.push(rspns[key]);
-        });
-      },
+      rspns => rspns.map(srvr => this.servers.push(srvr)),
       err => alert(err.message),
       () => console.log(this.servers)
     );
