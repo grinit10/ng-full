@@ -1,38 +1,18 @@
-<div class='container'>
-  <div class='row'>
-    <div class='col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2'>
-      <form (ngSubmit)='onsubmit(f)' #f='ngForm'>
-        <div id='user-data' ngModelGroup='userData'>
-          <div class='form-group'>
-            <label for='username'>Username</label>
-            <input type='text' id='username' class='form-control' ngModel name='username' required [value]='f.value.userData?.username'>
-          </div>
-          <button class='btn btn-default' type='button' (click)='suggestUserName()' >Suggest an Username</button>
-          <div class='form-group'>
-            <label for='email'>Mail</label>
-            <input type='email' id='email' class='form-control' ngModel email name='email' required #email='ngModel'>
-            <span *ngIf='!email.valid && email.dirty'>Please enter a valid email</span>
-          </div>
-        </div>
-        <div class='form-group'>
-          <label for='secret'>Secret Questions</label>
-          <select id='secret' class='form-control' [ngModel]='defaultValue' name='secret' required>
-            <option value='pet'>Your first Pet?</option>
-            <option value='teacher'>Your first teacher?</option>
-          </select>
-        </div>
-        <div class='form-group'>
-          <textarea name='questionAnswer' rows='3' [(ngModel)]='questionAnswer'></textarea>
-        </div>
-        <p>Your reply is {{questionAnswer}}</p>
-        <div class='radio' *ngFor='let gender of genders' >
-          <label>
-            <input type='radio' name='gender' ngModel [value]='gender'>
-            {{gender}}
-          </label>
-        </div>
-        <button class='btn btn-primary' type='submit' [disabled]='!f.valid'>Submit</button>
-      </form>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <button
+        class="btn btn-primary"
+        (click)="onlyOdd = !onlyOdd">Only show odd numbers</button>
+      <br><br>
+      <ul class="list-group">
+        <li
+          class="list-group-item">
+        </li>
+      </ul>
+      <ng-template [ngIf]="onlyOdd">
+        <p>Only odd</p>
+      </ng-template>
     </div>
   </div>
 </div>

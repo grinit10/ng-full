@@ -1,5 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -7,18 +6,6 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  defaultValue = 'pet';
-  questionAnswer = '';
-  genders = ['Male', 'Female'];
-
-  @ViewChild('f') signupForm: NgForm;
-  suggestUserName() {
-    const suggestedName = 'Superuser';
-    this.signupForm.value.userData.username = suggestedName;
-    this.signupForm.setValue(this.signupForm.value);
-  }
-
-  // onsubmit = (f: NgForm) => {console.log(f);
-  onsubmit = () => {console.log(this.signupForm);
-  }
+  numbers = [1, 2, 3, 4, 5];
+  onlyOdd = false;
 }
