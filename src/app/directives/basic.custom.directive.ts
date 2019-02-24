@@ -8,6 +8,7 @@ export class BasicDirective implements OnInit {
 
   constructor(private elementref: ElementRef) {}
   ngOnInit() {
-    this.elementref.nativeElement.style.backgroundColor = 'green';
+    this.elementref.nativeElement.addEventListener('mouseover', (e: any) => e.target.style.backgroundColor = 'green');
+    this.elementref.nativeElement.addEventListener('mouseout', (e: any) => e.target.style.backgroundColor = 'transparent');
   }
 }
