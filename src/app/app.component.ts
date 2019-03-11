@@ -12,9 +12,11 @@ export class AppComponent {
 
   constructor() {
     this.signupForm = new FormGroup({
-      'user': new FormControl(null, Validators.required),
-      'email': new FormControl(null, [Validators.required, Validators.email]),
-      'gender': new FormControl('male')
+      userdata: new FormGroup({
+        user: new FormControl(null, Validators.required),
+        email: new FormControl(null, [Validators.required, Validators.email])
+      }),
+      gender: new FormControl('male')
     });
   }
 
