@@ -7,7 +7,8 @@
             <label for='user'>Username</label>
             <input type='text' id='user' formControlName='user' class='form-control'>
             <span *ngIf='signupForm.get("userdata.user").invalid && signupForm.get("userdata.user").touched'>
-              Please enter validusernme
+              {{signupForm.get("userdata.user").errors['Forbidden name present'] ?
+              'Please enter a valid usernme' : 'Please enter username'}}
             </span>
           </div>
           <div class='form-group'>
