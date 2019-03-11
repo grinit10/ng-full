@@ -1,21 +1,30 @@
 <div class='container'>
   <div class='row'>
     <div class='col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2'>
-      <form [formGroup]='signupForm'>
+      <form [formGroup]='signupForm' (ngSubmit)='onSubmit()'>
         <div class='form-group'>
-          <label for='username'>Username</label>
-          <input type='text' id='username' formControlName='user' class='form-control'>
+          <label for='user'>Username</label>
+          <input type='text' id='user' formControlName='user' class='form-control'>
+          <span *ngIf='signupForm.get("user").invalid && signupForm.get("user").touched'>
+            Please enter validusernme
+          </span>
         </div>
         <div class='form-group'>
           <label for='email'>email</label>
           <input type='text' id='email' formControlName='email' class='form-control'>
+          <span *ngIf='signupForm.get("email").invalid && signupForm.get("email").touched'>
+            Please enter valid email
+          </span>
         </div>
         <div class='radio' *ngFor='let gndr of genders'>
           <label>
             <input type='radio' formControlName='gender' [value]='gndr'>{{ gndr }}
           </label>
+          <span *ngIf='signupForm.get("gender").invalid && signupForm.get("username").touched'>
+            Please enter valid gender
+          </span>
         </div>
-        <button class='btn btn-primary' type='submit'>Submit</button>
+        <button class='btn btn-primary' type='submit' disabled='signupForm.status === "INVALID"'>Submit</button>
       </form>
     </div>
   </div>
